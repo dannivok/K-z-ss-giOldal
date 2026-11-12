@@ -13,7 +13,7 @@ using System.Text;
 
 namespace feladat
 {
-  public abstract class Post
+   abstract class Post
     {
         private string _author;
         private int _likes;
@@ -43,10 +43,10 @@ namespace feladat
             return $"{Author}, {Likes} kedvelés";
         }
 
-        public abstract int Score()
-        {
-            return Likes;
-        }
+        public abstract int Score();
+
+
+        
     }
 
 
