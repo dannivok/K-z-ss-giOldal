@@ -1,22 +1,19 @@
+using Közösségi;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-/// <summary>
-/// Hozd létre a Post.cs fájlt, benne a Post osztályt. Legyen abstract: az oldalon minden bejegyzés
-/// szöveges, képes vagy szavazós
-/// • Hozz létre két privát változót: _author(string), _likes(int), hozzájuk két publikus property-t
-/// (Author, Likes). Az Author get blokkja adja vissza a privát megfelelőt, a set blokk a privát
-/// változónak állítja be az értéket. A Likes-nak csak get blokkja legyen
-///  Konstruktor egy paraméterrel: author.A szerzőt a property-n keresztül állítsd be, a kedvelések
-//száma 0-ról induljon
 
 namespace feladat
 {
-   abstract class Post
+   abstract class Post : IReportable
     {
         private string _author;
         private int _likes;
+
+        private int _reports;
+        private List<Comment> _comments;
+
         public string Author
         {
             get { return _author; }
@@ -30,6 +27,12 @@ namespace feladat
         {
             Author = author;
             _likes = 0;
+            _comments = new List<Comment>();
+        }
+
+        public List<Comment> Comments
+        {
+            get { return _comments; }
         }
 
         public virtual bool Like()
@@ -40,13 +43,27 @@ namespace feladat
 
         public virtual string GetDescription()
         {
-            return $"{Author}, {Likes} kedvelés";
+            return $"{Author}, {Likes} kedvelés "+ $"{(_comments.Count>0 ? $"{_comments.Count} hozzászólás" : "")}";
         }
 
         public abstract int Score();
 
+        public void Report()
+        {
+            _reports++;
+        }
 
-        
+        public int ReportCount()
+        {
+            return _reports;
+        }
+
+        public Comment AddComment(string author, string text)
+        {
+            Comment comment = new Comment(author, text, this);
+            _comments.Add(comment);
+            return comment;
+        }
     }
 
 
