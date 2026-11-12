@@ -20,7 +20,19 @@ namespace feladat
             Console.WriteLine(post2.GetDescription());
             Console.WriteLine(post2.Score());
 
+            ImagePost imagePost = new ImagePost("Rahul Rai Vendel", 3);
+            ImagePost imagePost1 = new ImagePost("Rahul Rai Vendel", 15);
 
+            imagePost.Like();
+            imagePost.Like();
+            imagePost.Like();
+
+
+            Console.WriteLine(imagePost.GetDescription());
+            Console.WriteLine(imagePost.Score());
+
+            Console.WriteLine(imagePost1.GetDescription());
+            Console.WriteLine(imagePost1.Score());
 
         }
     }
